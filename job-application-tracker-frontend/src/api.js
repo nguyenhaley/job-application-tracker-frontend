@@ -1,0 +1,1 @@
+export const API_URL = "https://job-application-tracker-production-1cb4.up.railway.app"

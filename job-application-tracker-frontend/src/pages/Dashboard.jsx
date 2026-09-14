@@ -1,5 +1,32 @@
+import { useState, useEffect } from 'react'
+import { API_URL } from '../api'
+
 function Dashboard() {
-  return <h1>Dashboard Page</h1>
+  const [applications, setApplications] = useState([])
+
+  useEffect(() => {
+    async function fetchApplications() {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`${API_URL}/applications`, {
+        headers: { 'Authorization': `Bearer ${token}` } /* request requires token from localStorage since user needs to be authenticated */
+      })
+      const data = await response.json()
+      setApplications(data)
+    }
+    
+    fetchApplications()
+  }, [])
+
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      {applications.map((app) => (
+        <div key={app.id}>
+          <p>{app.company.name} - {app.role_title} - {app.current_status}</p>
+        </div>
+      ))}
+    </div>
+  )
 }
 
 export default Dashboard

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { API_URL } from '../api'
+import AddApplicationForm from '../components/AddApplicationForm'
 
 function Dashboard() {
   const [applications, setApplications] = useState([])
@@ -13,16 +14,17 @@ function Dashboard() {
       const data = await response.json()
       setApplications(data)
     }
-    
+
     fetchApplications()
   }, [])
 
   return (
     <div>
       <h1>Dashboard</h1>
+      <AddApplicationForm />
       {applications.map((app) => (
         <div key={app.id}>
-          <p>{app.company.name} - {app.role_title} - {app.current_status}</p>
+          <p> {app.date_applied} - {app.source} - {app.company.name} - {app.role_title} - {app.current_status}</p>
         </div>
       ))}
     </div>

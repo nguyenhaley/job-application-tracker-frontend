@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
+import AddApplicationForm from './components/AddApplicationForm'
 
 function App() {
   return (
@@ -15,6 +16,12 @@ function App() {
           <Dashboard />
         </ProtectedRoute>
       }/>
+
+      <Route path="/applications/new" element={
+        <ProtectedRoute>
+          <AddApplicationForm />
+        </ProtectedRoute>
+      } />
 
     </Routes>
   )

@@ -33,8 +33,8 @@ function Login() {
   return (
     <form onSubmit={handleSubmit}>
         {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border"/>
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border"/>
         <button type="submit">Log In</button>
     </form>
   )

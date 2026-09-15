@@ -39,8 +39,8 @@ function Signup() {
         {successMessage && <p style={{color: 'green'}}>{successMessage}</p>}
         {!successMessage && (
             <>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border"/>
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border"/>
                 <button type="submit">Sign Up</button>
             </>
         )}

@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import {API_URL} from '../api'
-import { useNavigate } from 'react-router-dom'
 
-function AddApplicationForm() {
+function AddApplicationForm({ onClose, onSuccess }) {
   const [dateApplied, setDateApplied] = useState('')
   const [source, setSource] = useState('')
   const [companyName, setCompanyName] = useState('')
   const [roleTitle, setRoleTitle] = useState('')
 
-  const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
 
@@ -36,7 +34,7 @@ function AddApplicationForm() {
         const data = await response.json()
         setSuccessMessage('Application added successfully!')
         setTimeout(() => {
-            navigate('/dashboard')
+            onSuccess()
         }, 2000)
     } else {
         const errorData = await response.json()
@@ -54,7 +52,10 @@ function AddApplicationForm() {
                 <input type="text" value={source} onChange={(e) => setSource(e.target.value)} className="border"/>
                 <input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="border"/>
                 <input type="text" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className="border"/>
-                <button type="submit">Add Application</button>
+                <br></br>
+                <button type="button" onClick={onClose}>Cancel</button> 
+                <br></br>
+                <button type="submit">Submit</button>
             </>
         )}
     </form>

@@ -60,7 +60,7 @@ function Dashboard() {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-gray-200 text-sm text-gray-500">
-              <th className="py-3 px-4 font-medium">Date Applied</th>
+              <th className="py-3 px-4 font-medium">Date Applied / Found</th>
               <th className="py-3 px-4 font-medium">Company</th>
               <th className="py-3 px-4 font-medium">Role</th>
               <th className="py-3 px-4 font-medium">Location</th>

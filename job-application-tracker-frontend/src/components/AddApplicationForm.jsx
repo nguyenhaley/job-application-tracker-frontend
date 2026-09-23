@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {API_URL} from '../api'
+import { API_URL } from '../api'
 
 function AddApplicationForm({ onClose, onSuccess }) {
   const [dateApplied, setDateApplied] = useState('')
@@ -42,26 +42,93 @@ function AddApplicationForm({ onClose, onSuccess }) {
         const errorData = await response.json()
         setErrorMessage(errorData.detail || 'Failed to add application')
     }
-}
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-        {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
-        {successMessage && <p style={{color: 'green'}}>{successMessage}</p>}
-        {!successMessage && (
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+      <div className="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Add Application</h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {errorMessage && <p className="text-red-600 text-sm">{errorMessage}</p>}
+          {successMessage && <p className="text-green-600 text-sm">{successMessage}</p>}
+
+          {!successMessage && (
             <>
-                <input type="date" value={dateApplied} onChange={(e) => setDateApplied(e.target.value)} className="border" />
-                <input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="border"/>
-                <input type="text" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className="border"/>
-                <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} className="border"/>
-                <input type="text" value={applicationLink} onChange={(e) => setApplicationLink(e.target.value)} className="border"/>
-                <br></br>
-                <button type="button" onClick={onClose}>Cancel</button> 
-                <br></br>
-                <button type="submit">Submit</button>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Date Applied</label>
+                <input
+                  type="date"
+                  value={dateApplied}
+                  onChange={(e) => setDateApplied(e.target.value)}
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+                <input
+                  type="text"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  placeholder="e.g. Google"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Role Title</label>
+                <input
+                  type="text"
+                  value={roleTitle}
+                  onChange={(e) => setRoleTitle(e.target.value)}
+                  placeholder="e.g. Software Engineer"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder="e.g. San Diego, CA (Hybrid) or Remote"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Application Link (optional)</label>
+                <input
+                  type="text"
+                  value={applicationLink}
+                  onChange={(e) => setApplicationLink(e.target.value)}
+                  placeholder="https://..."
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-indigo-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-indigo-700 transition"
+                >
+                  Submit
+                </button>
+              </div>
             </>
-        )}
-    </form>
+          )}
+        </form>
+      </div>
+    </div>
   )
 }
 

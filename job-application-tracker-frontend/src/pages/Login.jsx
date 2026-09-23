@@ -35,10 +35,42 @@ function Login() {
     }
   }
 
+  async function handleDemoLogin() {
+    setErrorMessage('')
+
+    const response = await fetch(`${API_URL}/demo-login`, {
+        method: 'POST',
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        localStorage.setItem('token', data.access_token)
+        // Redirect to dashboard or show success message
+        navigate('/dashboard')
+    } else {
+        // Handle error, show error message
+        const errorData = await response.json()
+        if (Array.isArray(errorData.detail)) {
+          setErrorMessage(errorData.detail[0].msg.toUpperCase())
+        } else {
+          setErrorMessage(errorData.detail || 'Login failed')
+        }
+    }
+  }
+
   return (
     <div className="min-h-screen flex">
       {/* left side of page */}
       <div className="w-1/2 flex items-center justify-center bg-white">
+
+        <button
+            type="button"
+            onClick={handleDemoLogin}
+            className="absolute top-6 left-6 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 transition hover:bg-indigo-100 hover:border-indigo-300"
+          >
+            Try the demo — no signup needed →
+        </button>
+
         <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4 px-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-6">Login</h1>
 

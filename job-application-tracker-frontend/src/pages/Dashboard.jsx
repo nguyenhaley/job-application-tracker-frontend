@@ -11,6 +11,19 @@ function Dashboard() {
     const response = await fetch(`${API_URL}/applications`, {
       headers: { 'Authorization': `Bearer ${token}` } // request requires token from localStorage since user needs to be authenticated
     })
+
+    // checks to see if token is expired or not
+    if (response.status === 401) {
+      localStorage.removeItem('token')
+      navigate('/login')
+      return
+    }
+    
+    if (!response.ok) {
+      setErrorMessage('Could not load applications')
+      return
+    }
+
     const data = await response.json()
     setApplications(data)
   }
